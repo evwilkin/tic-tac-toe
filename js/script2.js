@@ -18,9 +18,9 @@ var reload = function() {
 }
 var whichTurn = function() {
 	if (clickCount % 2 === 0) {
-		document.getElementsByTagName("span")[0].innerHTML = "<p>X</p>";
+		document.getElementsByTagName("span")[0].innerHTML = "X";
 	} else {
-		document.getElementsByTagName("span")[0].innerHTML = "<p>O</p>";
+		document.getElementsByTagName("span")[0].innerHTML = "O";
 	}
 }
 
@@ -191,6 +191,27 @@ var winnerBottomRight = function() {
 }
 
 //Add Event Listeners to assign X/O and check for winner on each click
+
+for (var i = 0; i < allDivs.length; i++) {
+	allDivs[i].addEventListener("click", function() {
+		if (allDivs[i].className === "blank") {
+			clickCount += 1;
+			if (clickCount % 2) {
+				allDivs[i].className = "X";
+				allDivs[i].innerHTML = "X";
+			} else {
+				allDivs[i].className = "O";
+				allDivs[i].innerHTML = "O";
+			}
+			whichTurn();
+		} else {
+			alert("That tile is already taken, please select another");
+		}
+		winnerTopLeft();
+		console.log(allDivs[i].className);
+	})
+}
+/*
 topLeftTile.addEventListener("click", function() {
 	if (topLeftTile.className === "blank") {
 		clickCount += 1;
@@ -343,7 +364,7 @@ bottomRightTile.addEventListener("click", function() {
 	}
 	winnerBottomRight();
 })
-
+*/
 //Make "Start Over" button clear the board
 
 restart.addEventListener("click", function() {
